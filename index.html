@@ -8,42 +8,60 @@
         body {
             margin: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
             background-color: #ffe0df;
             overflow: hidden;
-            filter: drop-shadow(4px 6px 12px #ff008c);
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .ruleta-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
         }
         canvas {
-            display: block;
-            margin-left: -29%;
+            width: 90%; /* Aumenta el tamaño del canvas dentro del contenedor */
+            height: auto; /* Mantén la proporción */
         }
         #flecha {
             position: absolute;
-            top: 4%; /* Ajusta la posición vertical */
-            left: 23%; /* Ajusta la posición horizontal */
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -100%);
             width: 0;
             height: 0;
             border-left: 20px solid transparent;
             border-right: 20px solid transparent;
-            border-top: 50px solid #ff0e0e;
-            transform: translateY(-50%);
+            border-bottom: 250px solid #ff0e0e;
         }
-
-        #Info{
-            height: 400px;
-            width: auto;
-            margin-left: -24%;            
+        .info-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            padding: 20px;
+        }
+        #Info {
+            max-width: 100%;
+            max-height: 100%;
             filter: drop-shadow(4px 8px 16px #f700ff);
         }
-        
     </style>
 </head>
 <body>
-    <div id="flecha"></div>
-    <canvas id="ruleta"></canvas>
-    <img id="Info" src="image.png">
+    <div class="container">
+        <div class="ruleta-container">
+            <div id="flecha"></div>
+            <canvas id="ruleta"></canvas>
+        </div>
+        <div class="info-container">
+            <img id="Info" src="image.png" alt="Información">
+        </div>
+    </div>
     <audio id="spinAudio" src="wheel.mp3"></audio>
     <audio id="endAudio" src="tada.mp3"></audio>
 
@@ -53,17 +71,17 @@
         const spinAudio = document.getElementById('spinAudio');
         const endAudio = document.getElementById('endAudio');
 
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        // Configura el canvas para usar todo el espacio disponible
+        const container = document.querySelector('.ruleta-container');
+        canvas.width = container.offsetWidth * 0.9; // Ocupa el 90% del ancho del contenedor
+        canvas.height = canvas.width; // Mantén un canvas cuadrado
 
-        const centerX = width / 2;
-        const centerY = height / 2;
-        const radius = Math.min(width, height) / 2 - 20;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = canvas.width / 2 - 20; // Ajusta el radio para un mejor tamaño
 
         const slices = [
-            { text: '50%', color: '#FFC300' },
+        { text: '50%', color: '#FFC300' },
             { text: 'Casi', color: '#DAF7A6' },
             { text: '10%', color: '#B4C3E1' },
             { text: '30%', color: '#A8C86C' },
@@ -115,23 +133,16 @@
             { text: '30%', color: '#A8C86C' }
         ];
 
-        // Cambiar color de las casillas "Casi" a #B583F0
-        slices.forEach(slice => {
-            if (slice.text === 'Casi') {
-                slice.color = '#DAF7A6';
-            }
-        });
-
         const totalSlices = slices.length;
         const sliceAngle = (2 * Math.PI) / totalSlices;
         let rotation = 0;
         let isSpinning = false;
 
         function drawWheel() {
-            ctx.clearRect(0, 0, width, height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.save();
             ctx.translate(centerX, centerY);
-            
+
             for (let i = 0; i < totalSlices; i++) {
                 const angle = sliceAngle * i + rotation;
                 ctx.beginPath();
