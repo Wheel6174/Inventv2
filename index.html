@@ -11,6 +11,8 @@
             height: 100vh;
             background-color: #fdd172;
             overflow: hidden;
+            font-size: 10px;
+            
         }
         .container {
             display: flex;
@@ -37,7 +39,7 @@
         }
         #flecha {
             position: absolute;
-            top: -3%;
+            top: -1%;
             left: 50%;
             transform: translate(-50%, -100%);
             width: 0;
@@ -100,14 +102,11 @@
 
         const slices = [
             { text: '50%', color: '#FFC300' },
-            { text: 'Casi', color: '#ca499b' },
-            { text: '10%', color: '#723d95' },
-            { text: '30%', color: '#48ba72' },
             { text: '20%', color: '#FF8666' },
             { text: '30%', color: '#48ba72' },
             { text: '10%', color: '#723d95' },
             { text: '40%', color: '#1f7eb4' },
-            { text: '10%', color: '#723d95' },
+            { text: 'Otro Giro', color: '#34495e' },
             { text: 'Casi', color: '#ca499b' },
             { text: '10%', color: '#723d95' },
             { text: '20%', color: '#FF8666' },
@@ -117,38 +116,24 @@
             { text: '10%', color: '#723d95' },
             { text: '20%', color: '#FF8666' },
             { text: '10%', color: '#723d95' },
-            { text: '20%', color: '#FF8666' },
-            { text: '10%', color: '#723d95' },
-            { text: '40%', color: '#1f7eb4' },
-            { text: '10%', color: '#723d95' },
-            { text: '30%', color: '#48ba72' },
-            { text: '20%', color: '#FF8666' },
-            { text: '30%', color: '#48ba72' },
-            { text: '50%', color: '#FFC300' },
-            { text: '10%', color: '#723d95' },
-            { text: '20%', color: '#FF8666' },
-            { text: 'Casi', color: '#ca499b' },
             { text: '30%', color: '#48ba72' },
             { text: '20%', color: '#FF8666' },
             { text: '10%', color: '#723d95' },
-            { text: '40%', color: '#1f7eb4' },
             { text: '20%', color: '#FF8666' },
             { text: '30%', color: '#48ba72' },
-            { text: 'Casi', color: '#ca499b' },
-            { text: '10%', color: '#723d95' },
-            { text: 'Casi', color: '#ca499b' },
-            { text: '20%', color: '#FF8666' },
-            { text: 'Casi', color: '#ca499b' },
-            { text: '10%', color: '#723d95' },
-            { text: '20%', color: '#FF8666' },
-            { text: 'Casi', color: '#ca499b' },
-            { text: '10%', color: '#723d95' },
             { text: '20%', color: '#FF8666' },
             { text: '40%', color: '#1f7eb4' },
-            { text: '10%', color: '#723d95' },
+            { text: 'Otro Grio', color: '#34495e' },
+            { text: '20%', color: '#FF8666' },
             { text: 'Casi', color: '#ca499b' },
             { text: '10%', color: '#723d95' },
-            { text: '30%', color: '#48ba72' }
+            { text: 'Casi', color: '#ca499b' },
+            { text: '20%', color: '#FF8666' },
+            { text: 'Casi', color: '#ca499b' },
+            { text: '10%', color: '#723d95' },
+            { text: '20%', color: '#FF8666' },
+            { text: 'Casi', color: '#ca499b' },
+            { text: '10%', color: '#723d95' }
         ];
 
         const totalSlices = slices.length;
@@ -175,8 +160,8 @@
                     Math.sin(angle + sliceAngle / 2) * (radius - 50)
                 );
                 ctx.rotate(angle + sliceAngle / 2);
-                ctx.fillStyle = "#000";
-                ctx.font = "bold 20px Arial";
+                ctx.fillStyle = "#FFF";
+                ctx.font = "bold 15px Verdana";
                 ctx.textAlign = "center";
                 ctx.fillText(slices[i].text, 0, 5);
                 ctx.restore();
